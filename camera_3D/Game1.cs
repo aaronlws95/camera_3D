@@ -36,7 +36,7 @@ namespace camera_3D
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ship = new MyModel(Content.Load<Model>("Ship"), new Vector3(0, 10, 5));
             ground = new Ground(GraphicsDevice, Content.Load<Texture2D>("checkerboard"), Vector3.Zero);
-            cam = new MyCamera(GraphicsDevice, this.Window, new Vector3(0, -20, 20), ship.Position);
+            cam = new MyCamera(GraphicsDevice, this.Window, new Vector3(0, 0, 10), Vector3.Zero);
             camSpriteFont = Content.Load<SpriteFont>("CamSpriteFont");
             cube = new MyShape(GraphicsDevice, Vector3.Zero, Color.Green);
         }
