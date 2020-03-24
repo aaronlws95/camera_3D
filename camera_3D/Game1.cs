@@ -9,8 +9,9 @@ namespace camera_3D
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private Basic3dExampleCamera cam;
-        private Ship ship;
+        private MyCamera cam;
+        private MyModel ship;
+        private MyShape cube;
         private Ground ground;
         private SpriteFont camSpriteFont;
         private string camTextPosition = "Camera Position: ({0}, {1}, {2})";
@@ -33,10 +34,11 @@ namespace camera_3D
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ship = new Ship(Content.Load<Model>("Ship"), new Vector3(0, 10, 5));
-            ground = new Ground(GraphicsDevice, Content.Load<Texture2D>("checkerboard"));
-            cam = new Basic3dExampleCamera(GraphicsDevice, this.Window, new Vector3(0, 5, 10), ship.Position);
+            ship = new MyModel(Content.Load<Model>("Ship"), new Vector3(0, 10, 5));
+            ground = new Ground(GraphicsDevice, Content.Load<Texture2D>("checkerboard"), Vector3.Zero);
+            cam = new MyCamera(GraphicsDevice, this.Window, new Vector3(0, -20, 20), ship.Position);
             camSpriteFont = Content.Load<SpriteFont>("CamSpriteFont");
+            cube = new MyShape(GraphicsDevice, Vector3.Zero, Color.Green);
         }
 
         protected override void UnloadContent()
@@ -50,7 +52,7 @@ namespace camera_3D
                 Exit();
             Quaternion rotQ;
             cam.World.Decompose(out _, out rotQ, out _);
-            Calc.QuaternionToEuler(rotQ, out roll, out pitch, out yaw);
+            MyMath.QuaternionToEuler(rotQ, out roll, out pitch, out yaw);
             cam.Update(gameTime);
 
             base.Update(gameTime);
@@ -65,6 +67,7 @@ namespace camera_3D
             GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
             ship.Draw(cam.View, cam.Projection);
             ground.Draw(GraphicsDevice, cam.View, cam.Projection);
+            cube.Draw(GraphicsDevice, cam.View, cam.Projection);
             DrawText();
             base.Draw(gameTime);
         }

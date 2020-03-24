@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace camera_3D
 {
-    class Calc
+    class MyMath
     {
         public static void QuaternionToEuler(Quaternion q, out float roll, out float pitch, out float yaw)
         {

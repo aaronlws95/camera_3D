@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace camera_3D
 {
-    public class Ship
+    public class MyModel
     {
         public Vector3 Position;
         private Model model;
         private Matrix World;
 
-        public Ship(Model loadModel, Vector3 pos)
+        public MyModel(Model loadModel, Vector3 pos)
         {
             model = loadModel;
             Position = pos;
@@ -24,6 +24,8 @@ namespace camera_3D
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
+                    effect.EnableDefaultLighting();
+                    effect.PreferPerPixelLighting = true;
                     effect.World = World;
                     effect.View = view;
                     effect.Projection = projection;

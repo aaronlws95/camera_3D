@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace camera_3D
 {
-    public class Basic3dExampleCamera
+    public class MyCamera
     {
         private GraphicsDevice graphicsDevice = null;
         private GameWindow gameWindow = null;
@@ -22,7 +22,7 @@ namespace camera_3D
         private Vector3 startingPos;
         private Vector3 startingTargetPosToLookAt;
 
-        public Basic3dExampleCamera(GraphicsDevice gfxDevice, GameWindow window, Vector3 pos, Vector3 lookAtTarget)
+        public MyCamera(GraphicsDevice gfxDevice, GameWindow window, Vector3 pos, Vector3 lookAtTarget)
         {
             graphicsDevice = gfxDevice;
             gameWindow = window;

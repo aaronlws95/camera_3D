@@ -11,16 +11,16 @@ namespace camera_3D
         private BasicEffect effect;
         private Texture2D texture;
 
-        public Ground(GraphicsDevice gfxDevice, Texture2D loadTexture, int repetitions=20)
+        public Ground(GraphicsDevice gfxDevice, Texture2D loadTexture, Vector3 pos, float dim=20, int repetitions=20)
         {
             floorVerts = new VertexPositionTexture[6];
 
-            floorVerts[0].Position = new Vector3(-20, -20, 0);
-            floorVerts[1].Position = new Vector3(-20, 20, 0);
-            floorVerts[2].Position = new Vector3(20, -20, 0);
+            floorVerts[0].Position = pos + new Vector3(-dim, -dim, 0);
+            floorVerts[1].Position = pos + new Vector3(-dim, dim, 0);
+            floorVerts[2].Position = pos + new Vector3(dim, -dim, 0);
 
             floorVerts[3].Position = floorVerts[1].Position;
-            floorVerts[4].Position = new Vector3(20, 20, 0);
+            floorVerts[4].Position = pos + new Vector3(dim, dim, 0);
             floorVerts[5].Position = floorVerts[2].Position;
 
             floorVerts[0].TextureCoordinate = new Vector2(0, 0);
@@ -41,7 +41,7 @@ namespace camera_3D
             effect.Projection = projection;
             effect.TextureEnabled = true;
             effect.Texture = texture;
-            foreach (var pass in effect.CurrentTechnique.Passes)
+            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
                 gfxDevice.DrawUserPrimitives(PrimitiveType.TriangleList, floorVerts, 0, 2);
